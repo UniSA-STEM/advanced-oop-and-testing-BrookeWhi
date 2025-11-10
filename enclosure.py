@@ -16,8 +16,25 @@ class Enclosure:
         self.__cleanliness_level = 100
 
     def __str__(self):
+        animals = '\n'.join([str(animal) for animal in self.__animals])
         return (f"{self.__animal_type} Enclosure \n"
                 f"-----------------------\n"
-                f"Cleanliness Level: {self.__cleanliness_level}\n"
-                f"Animals: {self.__animals}\n"
+                f" Cleanliness Level: {self.__cleanliness_level}\n"
+                f" Animals: \n{animals}"
             )
+
+    def add_animal(self, animal):
+        if animal.type() == self.__animal_type:
+            self.__animals.append(animal)
+            print(f"{animal.get_name()} added to {self.__animal_type} Enclosure")
+        else:
+            print("Cannot add animal to this type of enclosure")
+
+    def remove_animal(self, animal):
+        if animal in self.__animals:
+            self.__animals.remove(animal)
+            print(f"{animal.get_name()} removed from {self.__animal_type} Enclosure")
+        else:
+            print("Animal not in enclosure")
+
+
