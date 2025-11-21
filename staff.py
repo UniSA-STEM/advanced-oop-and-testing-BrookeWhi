@@ -8,14 +8,26 @@ This is my own work as defined by the University's Academic Integrity Policy.
 '''
 
 class Staff:
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, name, role = None):
+        self.__name = name
+        self.__role = role
 
+    @property
+    def name(self):
+        return self.__name
 
 
 class Zookeeper(Staff):
+    def __init__(self, name):
+        super().__init__(name)
+        self.__role = "Zookeeper"
+
     def __str__(self):
         return f"{self.name} - Zookeeper"
+
+    @property
+    def role(self):
+        return self.__role
 
     def clean_enclosure(self, enclosure):
         enclosure.clean()
@@ -24,10 +36,17 @@ class Zookeeper(Staff):
         animal.feed()
 
 class Veterinarian(Staff):
+    def __init__(self, name):
+        super().__init__(name)
+        self.__role = "Veterinarian"
+
+    @property
+    def role(self):
+        return self.__role
+
     def __str__(self):
         return f"{self.name} - Veterinarian"
-    def get_name(self):
-        return self.name
+
 
     def checkup(self, animal):
         print(f"{self.name} conducting checkup on {animal.name}")
