@@ -16,16 +16,30 @@ class Enclosure:
         self.__cleanliness_level = 100
         self.__cleanliness_status = "Clean"
 
+    @property
+    def animal_type(self):
+        return self.__animal_type
+    @property
+    def environment_type(self):
+        return self.__environment_type
+
+    @property
+    def name(self):
+        return f"{self.__animal_type} Enclosure"
+
     def __str__(self):
-        animals = '\n'.join([str(animal) for animal in self.__animals])
-        return (f"{self.__animal_type} Enclosure \n"
+        if not self.__animals:
+            return f"Vacant {self.__environment_type} enclosure"
+        else:
+            animals = '\n'.join([str(animal.info) for animal in self.__animals])
+            return (f"{self.__animal_type} Enclosure \n"
                 f"-----------------------\n"
                 f" Cleanliness Level: {self.__cleanliness_level}\n"
-                f" Animals: \n{animals}"
-            )
+                f" Animals: \n{animals}\n"
+                )
 
     def add_animal(self, animal):
-        if animal.type() == self.__animal_type:
+        if animal.category == self.__animal_type:
             self.__animals.append(animal)
             print(f"{animal.name} added to {self.__animal_type} Enclosure")
             self.reduce_cleanliness()
@@ -34,8 +48,11 @@ class Enclosure:
 
     def remove_animal(self, animal):
         if animal in self.__animals:
-            self.__animals.remove(animal)
-            print(f"{animal.name} removed from {self.__animal_type} Enclosure")
+            if animal.health_status:
+                print(f"{animal.name} under treatment and cannot be removed from {self.__animal_type} Enclosure")
+            else:
+                self.__animals.remove(animal)
+                print(f"{animal.name} removed from {self.__animal_type} Enclosure")
         else:
             print("Animal not in enclosure")
 
