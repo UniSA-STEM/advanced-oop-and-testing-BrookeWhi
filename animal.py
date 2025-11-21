@@ -20,7 +20,7 @@ class Animal:
     def __str__(self):
 
         print(f"- - - - - - - - - - - -\n"
-              f">>>> Health Record <<<<\n"
+              f">>> Animal Details <<<\n"
               f"- - - - - - - - - - - -\n"
               f" Name: {self.__name} \n"
               f" Species: {self.__species} \n"
@@ -37,9 +37,25 @@ class Animal:
                 for k, v in i.items():
                     print(f"    {k}: {v}")
         print("- - - - - - - - - - -")
+
     @property
     def name(self):
         return self.__name
+
+    @property
+    def health_status(self):
+        return self.__health_status
+
+    @property
+    def type(self):
+        return self.__species
+
+    @property
+    def info(self):
+        return f" {self.__name}, {self.__species}"
+
+
+
 
     def health_check(self):
         if not self.__health_issues:
@@ -77,23 +93,22 @@ class Animal:
 
 
 class Mammal(Animal):
+
     def __init__(self, name, species, age, diet):
         Animal.__init__(self, name, species, age, diet)
         self.__category = "Mammal"
 
-    def type(self):
-        return self.__category
-
     def make_sound(self):
         return f"{self.__name} grunts"
+
+    @property
+    def category(self):
+        return "Mammal"
 
 class Bird(Animal):
     def __init__(self, name, species, age, diet):
         Animal.__init__(self, name, species, age, diet)
         self.__category = "Bird"
-
-    def type(self):
-        return self.__category
 
     def make_sound(self):
         return f"{self.__name} chirps"
@@ -102,9 +117,6 @@ class Reptile(Animal):
     def __init__(self, name, species, age, diet):
         Animal.__init__(self, name, species, age, diet)
         self.__category = "Reptile"
-
-    def type(self):
-        return self.__category
 
     def make_sound(self):
         return f"{self.__name} hisses"
