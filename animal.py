@@ -6,7 +6,7 @@ ID: 110468647
 Username: WHIBY031
 This is my own work as defined by the University's Academic Integrity Policy.
 '''
-
+from healthissues import HealthIssues
 class Animal:
     def __init__(self, name, species, age, diet):
         self.__name = name
@@ -18,11 +18,9 @@ class Animal:
         self.__health_status = "Healthy"
 
     def __str__(self):
-
-        print(f"- - - - - - - - - - - -\n"
-              f">>> Animal Details <<<\n"
-              f"- - - - - - - - - - - -\n"
-              f" Name: {self.__name} \n"
+        print(">>> Animal Details <<<")
+        print("- " * 35)
+        print(f" Name: {self.__name} \n"
               f" Species: {self.__species} \n"
               f" Age: {self.__age} \n"
               f" Diet: {self.__diet}\n"
@@ -36,7 +34,7 @@ class Animal:
                 print("\n  - Health Issue:")
                 for k, v in i.items():
                     print(f"    {k}: {v}")
-        print("- - - - - - - - - - -")
+        print("- "*35)
 
     @property
     def name(self):
@@ -47,15 +45,16 @@ class Animal:
         return self.__health_status
 
     @property
+    def under_treatment(self):
+        return self.__under_treatment
+
+    @property
     def type(self):
         return self.__species
 
     @property
     def info(self):
-        return f" {self.__name}, {self.__species}"
-
-
-
+        return f"{self.__name}, the {self.__species}"
 
     def health_check(self):
         if not self.__health_issues:
@@ -67,21 +66,22 @@ class Animal:
             print(f"{self.__name} is healthy")
         else:
             print(f"{self.__name} is suffering from health issues")
-            print(self.__str__())
+            self.__str__()
             if self.__under_treatment:
                 print(f"{self.__name} is being treated")
             else:
                 print(f"{self.__name} has no treatment plan")
 
+    @property
     def eating(self):
-        return f"{self.__name} is eating {self.__diet}"
+        return f"{self.info} is eating {self.__diet}"
 
     def sleeping(self):
-        return f"{self.__name} is sleeping"
+        print(f"{self.info} is sleeping")
 
     def feed(self):
-        print (f"Currently feeding {self.__name} the {self.__species} \n"
-               f"{self.eating()}")
+        print (f"Currently feeding {self.info} \n"
+               f"{self.eating}")
 
     def add_to_health_record(self, description, date_reported, severity, treatment_plan = None, notes = None):
         issue = HealthIssues(description, date_reported, severity, treatment_plan, notes)
@@ -99,7 +99,7 @@ class Mammal(Animal):
         self.__category = "Mammal"
 
     def make_sound(self):
-        return f"{self.__name} grunts"
+        print(f"{self.info} grunts")
 
     @property
     def category(self):
@@ -111,7 +111,11 @@ class Bird(Animal):
         self.__category = "Bird"
 
     def make_sound(self):
-        return f"{self.__name} chirps"
+        print(f"{self.info} chirps")
+
+    @property
+    def category(self):
+        return "Bird"
 
 class Reptile(Animal):
     def __init__(self, name, species, age, diet):
@@ -119,19 +123,9 @@ class Reptile(Animal):
         self.__category = "Reptile"
 
     def make_sound(self):
-        return f"{self.__name} hisses"
+        print(f"{self.info} hisses")
 
-class HealthIssues:
-    def __init__(self, description, date_reported, severity, treatment_plan = None, notes = None):
-        self.__description = description
-        self.__date_reported = date_reported
-        self.__severity = severity
-        self.__treatment_plan = treatment_plan
-        self.__notes = notes
+    @property
+    def category(self):
+        return "Reptile"
 
-    def report(self):
-        return ({"Description": self.__description,
-                "DateReported": self.__date_reported,
-                "Severity": self.__severity,
-                "TreatmentPlan": self.__treatment_plan,
-                "Notes": self.__notes})
