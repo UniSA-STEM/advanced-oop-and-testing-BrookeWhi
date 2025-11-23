@@ -8,6 +8,12 @@ This is my own work as defined by the University's Academic Integrity Policy.
 '''
 
 class Staff:
+    """
+    Class for staff attributes and methods
+    Attributes:
+        - name
+        - role
+    """
     def __init__(self, name, role = None):
         self.__name = name
         self.__role = role
@@ -18,6 +24,12 @@ class Staff:
 
 
 class Zookeeper(Staff):
+    """
+    Child class of staff for zookeeper methods
+    Attributes:
+        - name
+        - role (Zookeeper)
+    """
     def __init__(self, name):
         super().__init__(name)
         self.__role = "Zookeeper"
@@ -30,12 +42,28 @@ class Zookeeper(Staff):
         return self.__role
 
     def clean_enclosure(self, enclosure):
+        """
+        Calls clean enclosure method on enclosure
+        :param enclosure:
+        :return:
+        """
         enclosure.clean()
 
     def feed_animal(self, animal):
+        """
+        Calls feed animal method on animal
+        :param animal:
+        :return:
+        """
         animal.feed()
 
 class Veterinarian(Staff):
+    """
+    Child class of staff for veterinarian methods
+    Attributes:
+        - name
+        - role (Veterinarian)
+    """
     def __init__(self, name):
         super().__init__(name)
         self.__role = "Veterinarian"
@@ -49,6 +77,11 @@ class Veterinarian(Staff):
 
 
     def checkup(self, animal):
+        """
+        Calls checkup method on animal
+        :param animal:
+        :return:
+        """
         print(f"{self.name} conducting checkup on {animal.name}")
         animal.health_check()
 

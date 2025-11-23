@@ -1,8 +1,31 @@
+'''
+File: schedule.py
+Description: Schedule Class Module
+Author: Brooke Whitmore
+ID: 110468647
+Username: WHIBY031
+This is my own work as defined by the University's Academic Integrity Policy.
+'''
+
 class Schedule:
+    """
+    Schedule class
+    Initialises schedule and contains methods to add tasks and display schedule
+    Attributes:
+        tasks (list): list of tasks
+    """
     def __init__(self):
         self.__tasks = []
 
     def add_task(self, task_name, time, staff, assigment):
+        """
+        Add task to schedule
+        :param task_name:
+        :param time:
+        :param staff:
+        :param assigment:
+        :return:
+        """
         self.__tasks.append({
             "task": task_name,
             "time": time,
@@ -11,6 +34,10 @@ class Schedule:
         })
 
     def print_schedule(self):
+        """
+        Displays formatted schedule
+        :return:
+        """
         print(f"{"- "*35}\n"
               f"{"Schedule":^70}\n"
               f"{"- "*35}\n"
